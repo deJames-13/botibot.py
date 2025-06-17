@@ -1,0 +1,17 @@
+# Requirements for Raspberry Pi Modules
+# Install with: pip install -r requirements.txt
+
+# For OLED Display
+adafruit-circuitpython-ssd1306
+adafruit-blinka
+Pillow
+
+# For GPIO Control (Servo, Relay)
+RPi.GPIO
+
+# For Web Server
+Flask
+Flask-CORS
+
+# General utilities
+python-dateutil
