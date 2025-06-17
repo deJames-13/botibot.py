@@ -78,11 +78,11 @@ full = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/deJames-13/botibot"
-Documentation = "https://github.com/deJames-13/botibot/blob/main/README.md"
-Repository = "https://github.com/deJames-13/botibot.git"
-"Bug Tracker" = "https://github.com/deJames-13/botibot/issues"
-Changelog = "https://github.com/deJames-13/botibot/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/deJames-13/botibot.py"
+Documentation = "https://github.com/deJames-13/botibot.py/blob/main/README.md"
+Repository = "https://github.com/deJames-13/botibot.py.git"
+"Bug Tracker" = "https://github.com/deJames-13/botibot.py/issues"
+Changelog = "https://github.com/deJames-13/botibot.py/blob/main/CHANGELOG.md"
 
 [project.scripts]
 botibot-demo = "modules.cli:main"

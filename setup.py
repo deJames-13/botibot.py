@@ -47,11 +47,11 @@ setup(
     description="A python package for Project Botibot",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/deJames-13/botibot",
+    url="https://github.com/deJames-13/botibot.py",
     project_urls={
-        "Bug Tracker": "https://github.com/deJames-13/botibot/issues",
-        "Documentation": "https://github.com/deJames-13/botibot/blob/main/README.md",
-        "Source Code": "https://github.com/deJames-13/botibot",
+        "Bug Tracker": "https://github.com/deJames-13/botibot.py/issues",
+        "Documentation": "https://github.com/deJames-13/botibot.py/blob/main/README.md",
+        "Source Code": "https://github.com/deJames-13/botibot.py",
     },
     packages=find_packages(),
     classifiers=[

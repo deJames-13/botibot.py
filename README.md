@@ -52,7 +52,7 @@ pip install botibot.py[full]
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/deJames-13/botibot.git
+   git clone https://github.com/deJames-13/botibot.py.git
    cd botibot
    ```
 
@@ -372,7 +372,7 @@ Check the `tests/` directory for demo and test files:
 
 ## 🤝 Contributing
 
-1. Fork the repository at https://github.com/deJames-13/botibot
+1. Fork the repository at https://github.com/deJames-13/botibot.py
 2. Create a feature branch
 3. Make your changes
 4. Add tests if applicable
@@ -384,7 +384,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 **Author:** deJames-13  
 **Email:** de.james013@gmail.com  
-**GitHub:** https://github.com/deJames-13/botibot
+**GitHub:** https://github.com/deJames-13/botibot.py
 
 ## 🆘 Support
 
@@ -393,7 +393,7 @@ If you encounter issues:
 2. Verify hardware connections
 3. Check the tests directory for reference implementations
 4. Ensure all dependencies are installed
-5. Open an issue at https://github.com/deJames-13/botibot/issues
+5. Open an issue at https://github.com/deJames-13/botibot.py/issues
 
 ---
 
