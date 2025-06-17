@@ -41,7 +41,7 @@ def read_requirements():
 
 setup(
     name="botibot.py",
-    version="1.0.1-dev",
+    version="1.0.1",
     author="deJames-13",
     author_email="de.james013@gmail.com",
     description="A python package for Project Botibot",
