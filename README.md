@@ -42,18 +42,18 @@ A python package for Project Botibot - A collection of reusable, class-based uti
 
 ```bash
 # Install the package
-pip install raspberry-pi-modules
+pip install botibot.py
 
 # Or install with all optional dependencies
-pip install raspberry-pi-modules[full]
+pip install botibot.py[full]
 ```
 
 ### Option 2: Install from Source
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/raspberrypi-lab/raspberry-pi-modules.git
-   cd raspberry-pi-modules
+   git clone https://github.com/deJames-13/botibot.git
+   cd botibot
    ```
 
 2. **Install in development mode**
@@ -86,9 +86,9 @@ pip install dist/*.whl
 4. **Test installation**
    ```bash
    # Test CLI commands
-   rpi-demo --help
-   rpi-servo --help
-   rpi-oled --help
+   botibot-demo --help
+   botibot-servo --help
+   botibot-oled --help
    ```
 
 ## 🚀 Quick Start
@@ -205,7 +205,7 @@ while True:
 Run the comprehensive demo that showcases all modules:
 
 ```bash
-python demo_all_modules.py
+python tests/demo_all_modules.py
 ```
 
 This demo will:
@@ -227,10 +227,10 @@ The package includes CLI tools for quick hardware testing:
 ### Main Demo Command
 ```bash
 # Run complete hardware demo
-rpi-demo
+botibot-demo
 
 # Run quick demo
-rpi-demo --quick
+botibot-demo --quick
 ```
 
 ### Individual Component Commands
@@ -238,49 +238,49 @@ rpi-demo --quick
 **Servo Control:**
 ```bash
 # Set servo to specific angle
-rpi-servo --pin 11 --angle 90
+botibot-servo --pin 11 --angle 90
 
 # Perform sweep operation
-rpi-servo --pin 11 --sweep
+botibot-servo --pin 11 --sweep
 
 # Center servo
-rpi-servo --pin 11 --center
+botibot-servo --pin 11 --center
 ```
 
 **OLED Display:**
 ```bash
 # Display text
-rpi-oled --text "Hello Raspberry Pi!"
+botibot-oled --text "Hello Raspberry Pi!"
 
 # Clear display
-rpi-oled --clear
+botibot-oled --clear
 
 # Run OLED demo
-rpi-oled --demo
+botibot-oled --demo
 ```
 
 **Relay Control:**
 ```bash
 # Turn relay on
-rpi-relay --pin 17 --on
+botibot-relay --pin 17 --on
 
 # Turn relay off
-rpi-relay --pin 17 --off
+botibot-relay --pin 17 --off
 
 # Toggle relay
-rpi-relay --pin 17 --toggle
+botibot-relay --pin 17 --toggle
 
 # Pulse relay for 3 seconds
-rpi-relay --pin 17 --pulse 3.0
+botibot-relay --pin 17 --pulse 3.0
 ```
 
 **Web Server:**
 ```bash
 # Start web server
-rpi-server --port 5000 --host 0.0.0.0
+botibot-server --port 5000 --host 0.0.0.0
 
 # Start with debug mode
-rpi-server --port 8080 --debug
+botibot-server --port 8080 --debug
 ```
 
 ## 🔧 Hardware Connections
@@ -366,15 +366,13 @@ rpi-server --port 8080 --debug
 
 ## 📝 Examples Directory
 
-Check the `examples/` directory for the original sample codes that these modules are based on:
-- `servo.py` - Original servo example
-- `oled.py` - Original OLED example  
-- `relay.py` - Original relay example
-- `webserver.py` - Original web server example
+Check the `tests/` directory for demo and test files:
+- `demo_all_modules.py` - Comprehensive demo showcasing all modules
+- `test_basic.py` - Basic import and functionality tests
 
 ## 🤝 Contributing
 
-1. Fork the repository
+1. Fork the repository at https://github.com/deJames-13/botibot
 2. Create a feature branch
 3. Make your changes
 4. Add tests if applicable
@@ -382,16 +380,23 @@ Check the `examples/` directory for the original sample codes that these modules
 
 ## 📄 License
 
-This project is for educational purposes as part of the Microcontroller Lab course.
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+**Author:** deJames-13  
+**Email:** de.james013@gmail.com  
+**GitHub:** https://github.com/deJames-13/botibot
 
 ## 🆘 Support
 
 If you encounter issues:
 1. Check the troubleshooting section
 2. Verify hardware connections
-3. Check the examples directory for reference
+3. Check the tests directory for reference implementations
 4. Ensure all dependencies are installed
+5. Open an issue at https://github.com/deJames-13/botibot/issues
 
 ---
 
 **Happy coding with your Raspberry Pi! 🍓**
+
+*botibot.py - A python package for Project Botibot by deJames-13*
