@@ -1,4 +1,4 @@
-"""Basic import tests for raspberry-pi-modules."""
+"""Basic import tests for botibot.py package."""
 
 import pytest
 import sys

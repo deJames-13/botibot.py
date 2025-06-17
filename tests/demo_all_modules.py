@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive example demonstrating all the reusable modules.
+Comprehensive example demonstrating all the botibot.py modules.
 
 This example shows how to use:
 - ServoController for servo motor control
@@ -8,8 +8,10 @@ This example shows how to use:
 - RelayController for relay switching
 - FlaskServer for web interface
 
-Author: Raspberry Pi Lab
-Date: 2024
+Author: deJames-13
+Email: de.james013@gmail.com
+GitHub: github.com/deJames-13/botibot
+Date: 2025
 """
 
 import time

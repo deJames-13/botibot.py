@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Command-line interface tools for botibot.
+Command-line interface tools for botibot.py package.
 
 This module provides CLI commands for quick testing and control of hardware components.
 """
@@ -15,14 +15,14 @@ try:
     from modules import ServoController, OLEDDisplay, RelayController, FlaskServer
 except ImportError as e:
     print(f"Error importing modules: {e}")
-    print("Make sure botibot is properly installed")
+    print("Make sure botibot.py is properly installed")
     sys.exit(1)
 
 
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="Botibot CLI Tools",
+        description="Botibot.py CLI Tools",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

@@ -35,7 +35,7 @@ def read_requirements():
         ]
 
 setup(
-    name="botibot",
+    name="botibot.py",
     version="1.0.0",
     author="deJames-13",
     author_email="de.james013@gmail.com",
@@ -108,6 +108,7 @@ setup(
     },
     zip_safe=False,
     keywords=[
+        "botibot.py",
         "botibot",
         "raspberry-pi",
         "microcontroller",

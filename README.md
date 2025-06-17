@@ -1,6 +1,6 @@
-# Raspberry Pi Lab Modules
+# botibot.py
 
-A collection of reusable, class-based utility modules for common Raspberry Pi microcontroller projects. These modules provide easy-to-use interfaces for controlling servos, OLED displays, relays, and web servers.
+A python package for Project Botibot - A collection of reusable, class-based utility modules for common Raspberry Pi microcontroller projects. These modules provide easy-to-use interfaces for controlling servos, OLED displays, relays, and web servers.
 
 ## 📦 Modules Overview
 
