@@ -9,9 +9,11 @@ __copyright__ = "Copyright 2025 deJames-13"
 # Version info tuple for programmatic access
 VERSION_INFO = (1, 0, 0)
 
+
 def get_version():
     """Get the current version string."""
     return __version__
+
 
 def get_version_info():
     """Get the current version as a tuple."""

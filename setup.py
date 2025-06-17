@@ -8,6 +8,7 @@ A python package for Project Botibot
 from setuptools import setup, find_packages
 import os
 
+
 # Read the README file for long description
 def read_readme():
     """Read README.md for long description."""
@@ -17,12 +18,15 @@ def read_readme():
     except FileNotFoundError:
         return "A python package for Project Botibot"
 
+
 # Read requirements from requirements.txt
 def read_requirements():
     """Read requirements from requirements.txt."""
     try:
         with open("requirements.txt", "r", encoding="utf-8") as fh:
-            return [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+            return [
+                line.strip() for line in fh if line.strip() and not line.startswith("#")
+            ]
     except FileNotFoundError:
         return [
             "adafruit-circuitpython-ssd1306",
@@ -31,8 +35,9 @@ def read_requirements():
             "RPi.GPIO",
             "Flask",
             "Flask-CORS",
-            "python-dateutil"
+            "python-dateutil",
         ]
+
 
 setup(
     name="botibot.py",
