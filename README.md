@@ -97,7 +97,7 @@ pip install dist/*.whl
 
 #### Servo Control
 ```python
-from modules import ServoController
+from botibot import ServoController
 
 # Basic servo control
 with ServoController(pin=11) as servo:
@@ -109,7 +109,7 @@ with ServoController(pin=11) as servo:
 
 #### OLED Display
 ```python
-from modules import OLEDDisplay
+from botibot import OLEDDisplay
 
 # Create display and show text
 oled = OLEDDisplay(width=128, height=64)
@@ -127,7 +127,7 @@ oled.show()
 
 #### Relay Control
 ```python
-from modules import RelayController
+from botibot import RelayController
 
 # Basic relay control
 with RelayController(pin=17) as relay:
@@ -144,7 +144,7 @@ with RelayController(pin=17) as relay:
 
 #### Web Server
 ```python
-from modules import FlaskServer
+from botibot import FlaskServer
 
 # Create web server
 server = FlaskServer(name="My Pi Server", port=5000)
@@ -165,7 +165,7 @@ server.run()  # Visit http://localhost:5000
 ### Complete Integration Example
 
 ```python
-from modules import ServoController, OLEDDisplay, RelayController, FlaskServer
+from botibot import ServoController, OLEDDisplay, RelayController, FlaskServer
 import time
 import threading
 

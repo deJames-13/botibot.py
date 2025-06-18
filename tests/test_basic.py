@@ -99,7 +99,7 @@ def test_import_modules():
 def test_import_servo_controller():
     """Test importing ServoController."""
     try:
-        from modules import ServoController
+        from botibot import ServoController
 
         assert ServoController is not None
     except ImportError as e:
@@ -109,7 +109,7 @@ def test_import_servo_controller():
 def test_import_oled_display():
     """Test importing OLEDDisplay."""
     try:
-        from modules import OLEDDisplay
+        from botibot import OLEDDisplay
 
         assert OLEDDisplay is not None
     except ImportError as e:
@@ -119,7 +119,7 @@ def test_import_oled_display():
 def test_import_relay_controller():
     """Test importing RelayController."""
     try:
-        from modules import RelayController
+        from botibot import RelayController
 
         assert RelayController is not None
     except ImportError as e:
@@ -129,7 +129,7 @@ def test_import_relay_controller():
 def test_import_flask_server():
     """Test importing FlaskServer."""
     try:
-        from modules import FlaskServer
+        from botibot import FlaskServer
 
         assert FlaskServer is not None
     except ImportError as e:
@@ -138,7 +138,7 @@ def test_import_flask_server():
 
 def test_servo_controller_basic():
     """Test basic ServoController functionality."""
-    from modules import ServoController
+    from botibot import ServoController
 
     # Test initialization (should not raise error with mocked GPIO)
     servo = ServoController(pin=11)
@@ -153,7 +153,7 @@ def test_servo_controller_basic():
 
 def test_flask_server_basic():
     """Test basic FlaskServer functionality."""
-    from modules import FlaskServer
+    from botibot import FlaskServer
 
     # Test initialization
     server = FlaskServer(name="Test Server", port=5001)

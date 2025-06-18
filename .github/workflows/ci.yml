@@ -48,19 +48,19 @@ jobs:
       run: |
         pip install flake8
         # stop the build if there are Python syntax errors or undefined names
-        flake8 modules/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 botibot/ --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 modules/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        flake8 botibot/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     
     - name: Format check with black
       run: |
         pip install black
-        black --check --diff modules/
+        black --check --diff botibot/
     
     - name: Type check with mypy
       run: |
         pip install mypy
-        mypy modules/ --ignore-missing-imports || true
+        mypy botibot/ --ignore-missing-imports || true
     
     - name: Test package import
       run: |
@@ -68,10 +68,10 @@ jobs:
         import sys
         sys.path.insert(0, '.')
         try:
-            import modules
-            print('✓ Package imports successfully')
-            print('Package description:', getattr(modules, '__description__', 'N/A'))
-            print('Author:', getattr(modules, '__author__', 'N/A'))
+            import botibot
+            print('✅ Package imports successfully')
+            print('Package description:', getattr(botibot, '__description__', 'N/A'))
+            print('Author:', getattr(botibot, '__author__', 'N/A'))
         except ImportError as e:
             print('Expected import error due to hardware dependencies:', e)
             print('This is normal in CI environment without GPIO hardware')
@@ -178,7 +178,7 @@ jobs:
     - name: Run security check with bandit
       run: |
         pip install bandit
-        bandit -r modules/ -f json -o bandit-report.json || true
+        bandit -r botibot/ -f json -o bandit-report.json || true
     
     - name: Upload security report
       uses: actions/upload-artifact@v4

@@ -41,7 +41,7 @@ def read_requirements():
 
 setup(
     name="botibot.py",
-    version="1.0.1",
+    version="1.0.2",
     author="deJames-13",
     author_email="de.james013@gmail.com",
     description="A python package for Project Botibot",
@@ -53,7 +53,7 @@ setup(
         "Documentation": "https://github.com/deJames-13/botibot.py/blob/main/README.md",
         "Source Code": "https://github.com/deJames-13/botibot.py",
     },
-    packages=find_packages(),
+    packages=find_packages(include=["botibot", "botibot.*"]),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Education",
@@ -95,16 +95,16 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "botibot-demo=modules.cli:main",
-            "botibot-servo=modules.cli:servo_cli",
-            "botibot-oled=modules.cli:oled_cli",
-            "botibot-relay=modules.cli:relay_cli",
-            "botibot-server=modules.cli:server_cli",
+            "botibot-demo=botibot.cli:main",
+            "botibot-servo=botibot.cli:servo_cli",
+            "botibot-oled=botibot.cli:oled_cli",
+            "botibot-relay=botibot.cli:relay_cli",
+            "botibot-server=botibot.cli:server_cli",
         ],
     },
     include_package_data=True,
     package_data={
-        "modules": [
+        "botibot": [
             "*.md",
             "templates/*.html",
             "static/css/*.css",

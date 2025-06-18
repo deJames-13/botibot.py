@@ -23,7 +23,7 @@ import os
 # Add the modules directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), "modules"))
 
-from modules import ServoController, OLEDDisplay, RelayController, FlaskServer
+from botibot import ServoController, OLEDDisplay, RelayController, FlaskServer
 
 
 class RaspberryPiController:

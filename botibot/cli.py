@@ -12,9 +12,9 @@ import threading
 from typing import Optional
 
 try:
-    from modules import ServoController, OLEDDisplay, RelayController, FlaskServer
+    from botibot import ServoController, OLEDDisplay, RelayController, FlaskServer
 except ImportError as e:
-    print(f"Error importing modules: {e}")
+    print(f"Error importing botibot modules: {e}")
     print("Make sure botibot.py is properly installed")
     sys.exit(1)
 
