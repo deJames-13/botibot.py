@@ -1,4 +1,4 @@
-"""Version information for botibot package."""
+"""Version information for modules package."""
 
 __version__ = "1.0.0"
 __author__ = "deJames-13"

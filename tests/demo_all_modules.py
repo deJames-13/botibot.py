@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 """
-Comprehensive example demonstrating all the botibot.py modules.
+Comprehensive example demonstrating all the modules.py modules.
 
 This example shows how to use:
 - ServoController for servo motor control
 - OLEDDisplay for display management
 - RelayController for relay switching
 - FlaskServer for web interface
+- InfraredSensor for infrared detection
+- UltrasonicSensor for distance measurement
+- MotorController for motor control
 
 Author: deJames-13
 Email: de.james013@gmail.com
-GitHub: github.com/deJames-13/botibot
+GitHub: github.com/deJames-13/modules
 Date: 2025
 """
 
@@ -21,9 +24,12 @@ import sys
 import os
 
 # Add the modules directory to the path
-sys.path.append(os.path.join(os.path.dirname(__file__), "modules"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "modules"))
 
-from botibot import ServoController, OLEDDisplay, RelayController, FlaskServer
+from modules import ServoController, OLEDDisplay, RelayController, FlaskServer
+from modules.gsm import SIM800LController
+from modules.ir_temp import MLX90614Sensor
+from modules.scheduler import PillScheduler
 
 
 class RaspberryPiController:
@@ -40,6 +46,11 @@ class RaspberryPiController:
         self.oled = None
         self.relay = None
         self.web_server = None
+        
+        # New components
+        self.gsm = None
+        self.ir_temp = None
+        self.pill_scheduler = None
 
         # System status
         self.system_status = {
@@ -47,6 +58,10 @@ class RaspberryPiController:
             "humidity": 60.0,
             "servo_angle": 90,
             "relay_state": False,
+            "ambient_temp": 22.0,
+            "object_temp": 37.0,
+            "gsm_signal": "Unknown",
+            "next_pill": "None scheduled",
             "last_update": datetime.now().isoformat(),
         }
 
@@ -69,6 +84,42 @@ class RaspberryPiController:
             # Initialize relay (GPIO pin 17)
             print("⚡ Setting up relay controller...")
             self.relay = RelayController(pin=17)
+            
+            # Initialize GSM module
+            print("📱 Setting up GSM module...")
+            try:
+                self.gsm = SIM800LController(port="/dev/ttyS0", baudrate=9600)
+                print(f"GSM Status: {self.gsm.get_network_status()}")
+                self.system_status["gsm_signal"] = f"{self.gsm.get_signal_strength()} dBm"
+            except Exception as e:
+                print(f"⚠️ GSM module initialization warning: {e}")
+                print("GSM features will be disabled")
+                
+            # Initialize IR Temperature sensor
+            print("🌡️ Setting up IR Temperature sensor...")
+            try:
+                self.ir_temp = MLX90614Sensor(bus_number=1, address=0x5A)
+                ambient_temp, object_temp = self.ir_temp.get_temperatures()
+                self.system_status["ambient_temp"] = ambient_temp
+                self.system_status["object_temp"] = object_temp
+                print(f"Ambient: {ambient_temp:.1f}°C, Object: {object_temp:.1f}°C")
+            except Exception as e:
+                print(f"⚠️ IR Temperature sensor warning: {e}")
+                print("Temperature measurement features will be disabled")
+                
+            # Initialize Pill Scheduler
+            print("🗓️ Setting up Pill Scheduler...")
+            try:
+                self.pill_scheduler = PillScheduler()
+                next_med = self.pill_scheduler.get_next_medication()
+                if next_med:
+                    self.system_status["next_pill"] = f"{next_med['name']} at {next_med['time']}"
+                    print(f"Next medication: {next_med['name']} at {next_med['time']}")
+                else:
+                    print("No upcoming medications scheduled")
+            except Exception as e:
+                print(f"⚠️ Pill Scheduler warning: {e}")
+                print("Scheduling features will be disabled")
 
             print("✅ All components initialized successfully!")
 
@@ -107,56 +158,97 @@ class RaspberryPiController:
                 else:
                     return {"error": "Servo not available"}, 500
             except Exception as e:
-                return {"error": str(e)}, 400
-
-        @self.web_server.add_route("/api/relay/<action>", methods=["POST"])
-        def control_relay(action):
-            """Control relay via web API."""
+                return {"error": str(e)}, 500
+                
+        @self.web_server.add_route("/api/temperature", methods=["GET"])
+        def get_temperature():
+            """Get IR temperature readings."""
             try:
-                if self.relay:
-                    if action.lower() == "on":
-                        self.relay.turn_on()
-                        state = True
-                    elif action.lower() == "off":
-                        self.relay.turn_off()
-                        state = False
-                    elif action.lower() == "toggle":
-                        self.relay.toggle()
-                        state = self.relay.is_on()
-                    else:
-                        return {"error": "Invalid action"}, 400
-
-                    self.system_status["relay_state"] = state
-                    self.web_server.set_data("relay_state", state)
-                    return {"success": True, "state": state}
+                if self.ir_temp:
+                    ambient, object_temp = self.ir_temp.get_temperatures()
+                    self.system_status["ambient_temp"] = ambient
+                    self.system_status["object_temp"] = object_temp
+                    self.web_server.set_data("ambient_temp", ambient)
+                    self.web_server.set_data("object_temp", object_temp)
+                    return {
+                        "success": True, 
+                        "ambient": ambient,
+                        "object": object_temp,
+                        "unit": "celsius"
+                    }
                 else:
-                    return {"error": "Relay not available"}, 500
+                    return {"error": "IR Temperature sensor not available"}, 500
             except Exception as e:
-                return {"error": str(e)}, 400
-
-        @self.web_server.add_route("/api/display", methods=["POST"])
-        def control_display():
-            """Update OLED display via web API."""
+                return {"error": str(e)}, 500
+                
+        @self.web_server.add_route("/api/sms", methods=["POST"])
+        def send_sms():
+            """Send SMS notification."""
+            from flask import request
             try:
-                from flask import request
-
-                data = request.get_json()
-
-                if not data or "text" not in data:
-                    return {"error": "Text required"}, 400
-
-                if self.oled:
-                    text = data["text"]
-                    x = data.get("x", 0)
-                    y = data.get("y", 0)
-
-                    self.oled.clear(show=False)
-                    self.oled.write_text(text, x, y)
-                    return {"success": True, "text": text}
+                if self.gsm:
+                    data = request.json
+                    if not data or "phone" not in data or "message" not in data:
+                        return {"error": "Missing required fields (phone, message)"}, 400
+                        
+                    result = self.gsm.send_sms(data["phone"], data["message"])
+                    return {
+                        "success": result, 
+                        "phone": data["phone"]
+                    }
                 else:
-                    return {"error": "Display not available"}, 500
+                    return {"error": "GSM module not available"}, 500
             except Exception as e:
-                return {"error": str(e)}, 400
+                return {"error": str(e)}, 500
+                
+        @self.web_server.add_route("/api/schedule", methods=["GET"])
+        def get_schedule():
+            """Get medication schedule."""
+            try:
+                if self.pill_scheduler:
+                    schedules = self.pill_scheduler.get_all_schedules()
+                    return {
+                        "success": True, 
+                        "schedules": schedules
+                    }
+                else:
+                    return {"error": "Pill scheduler not available"}, 500
+            except Exception as e:
+                return {"error": str(e)}, 500
+                
+        @self.web_server.add_route("/api/schedule", methods=["POST"])
+        def add_schedule():
+            """Add medication schedule."""
+            from flask import request
+            try:
+                if self.pill_scheduler:
+                    data = request.json
+                    if not data or not all(k in data for k in ["name", "dosage", "times", "days"]):
+                        return {"error": "Missing required fields"}, 400
+                        
+                    schedule_id = self.pill_scheduler.add_schedule(
+                        name=data["name"],
+                        dosage=data["dosage"],
+                        times=data["times"],
+                        days=data["days"],
+                        start_date=data.get("start_date"),
+                        end_date=data.get("end_date"),
+                        notes=data.get("notes", "")
+                    )
+                    
+                    next_med = self.pill_scheduler.get_next_medication()
+                    if next_med:
+                        self.system_status["next_pill"] = f"{next_med['name']} at {next_med['time']}"
+                        self.web_server.set_data("next_pill", self.system_status["next_pill"])
+                        
+                    return {
+                        "success": True, 
+                        "id": schedule_id
+                    }
+                else:
+                    return {"error": "Pill scheduler not available"}, 500
+            except Exception as e:
+                return {"error": str(e)}, 500
 
         @self.web_server.add_route("/api/status/hardware")
         def hardware_status():
@@ -250,6 +342,78 @@ class RaspberryPiController:
                     self.system_status["relay_state"] = False
                     print("  Relay OFF")
                     time.sleep(1)
+                    
+            # IR Temperature demo
+            if self.ir_temp:
+                print("🌡️ IR Temperature demo...")
+                if self.oled:
+                    self.oled.clear(show=False)
+                    self.oled.write_text("IR Temp Demo", 0, 0, show=True)
+                
+                for i in range(3):
+                    ambient, object_temp = self.ir_temp.get_temperatures()
+                    self.system_status["ambient_temp"] = ambient
+                    self.system_status["object_temp"] = object_temp
+                    print(f"  Ambient: {ambient:.1f}°C, Object: {object_temp:.1f}°C")
+                    
+                    if self.oled:
+                        self.oled.clear(show=False)
+                        self.oled.write_text("IR Temperature", 0, 0, show=False)
+                        self.oled.write_text(f"Ambient: {ambient:.1f}C", 0, 16, show=False)
+                        self.oled.write_text(f"Object: {object_temp:.1f}C", 0, 32, show=True)
+                    
+                    time.sleep(2)
+                    
+            # GSM demo
+            if self.gsm:
+                print("📱 GSM demo...")
+                if self.oled:
+                    self.oled.clear(show=False)
+                    self.oled.write_text("GSM Demo", 0, 0, show=True)
+                
+                # Just check status, don't send SMS in demo
+                network_status = self.gsm.get_network_status()
+                signal_strength = self.gsm.get_signal_strength()
+                self.system_status["gsm_signal"] = f"{signal_strength} dBm"
+                
+                print(f"  Network: {network_status}")
+                print(f"  Signal: {signal_strength} dBm")
+                
+                if self.oled:
+                    self.oled.clear(show=False)
+                    self.oled.write_text("GSM Status", 0, 0, show=False)
+                    self.oled.write_text(f"Network: {network_status}", 0, 16, show=False)
+                    self.oled.write_text(f"Signal: {signal_strength}dBm", 0, 32, show=True)
+                
+                time.sleep(2)
+                
+            # Scheduler demo
+            if self.pill_scheduler:
+                print("🗓️ Scheduler demo...")
+                if self.oled:
+                    self.oled.clear(show=False)
+                    self.oled.write_text("Scheduler Demo", 0, 0, show=True)
+                
+                next_med = self.pill_scheduler.get_next_medication()
+                if next_med:
+                    print(f"  Next: {next_med['name']} at {next_med['time']}")
+                    self.system_status["next_pill"] = f"{next_med['name']} at {next_med['time']}"
+                    
+                    if self.oled:
+                        self.oled.clear(show=False)
+                        self.oled.write_text("Next Medication", 0, 0, show=False)
+                        self.oled.write_text(f"{next_med['name']}", 0, 16, show=False)
+                        self.oled.write_text(f"Time: {next_med['time']}", 0, 32, show=True)
+                else:
+                    print("  No upcoming medications")
+                    
+                    if self.oled:
+                        self.oled.clear(show=False)
+                        self.oled.write_text("Medications", 0, 0, show=False)
+                        self.oled.write_text("No upcoming", 0, 16, show=False)
+                        self.oled.write_text("medications", 0, 32, show=True)
+                
+                time.sleep(2)
 
             # Display demo
             if self.oled:

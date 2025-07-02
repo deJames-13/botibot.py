@@ -6,8 +6,9 @@ adafruit-circuitpython-ssd1306
 adafruit-blinka
 Pillow
 
-# For GPIO Control (Servo, Relay)
+# For GPIO Control (Servo, Relay, Motors, Sensors)
 RPi.GPIO
+gpiozero
 
 # For Web Server
 Flask
@@ -15,3 +16,17 @@ Flask-CORS
 
 # General utilities
 python-dateutil
+
+# For IR Temperature Sensor (MLX90614)
+adafruit-circuitpython-mlx90614
+adafruit-blinka
+# smbus2  # Not needed with Adafruit library
+# mlx90614  # Not needed with Adafruit library
+
+# For Scheduler
+schedule
+apscheduler
+sqlite3
+
+# For GSM Module (SIM800L)
+pyserial
