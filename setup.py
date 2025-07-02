@@ -41,20 +41,20 @@ def read_requirements():
 
 
 setup(
-    name="modules.py",
-    version="1.0.3",
+    name="botibot.py",
+    version="1.0.4",
     author="deJames-13",
     author_email="de.james013@gmail.com",
     description="A python package for Project Botibot with gpiozero integration",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/deJames-13/modules.py",
+    url="https://github.com/deJames-13/botibot.py",
     project_urls={
-        "Bug Tracker": "https://github.com/deJames-13/modules.py/issues",
-        "Documentation": "https://github.com/deJames-13/modules.py/blob/main/README.md",
-        "Source Code": "https://github.com/deJames-13/modules.py",
+        "Bug Tracker": "https://github.com/deJames-13/botibot.py/issues",
+        "Documentation": "https://github.com/deJames-13/botibot.py/blob/main/README.md",
+        "Source Code": "https://github.com/deJames-13/botibot.py",
     },
-    packages=find_packages(include=["modules", "modules.*"]),
+    packages=find_packages(include=["botibot", "botibot.*"]),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Education",
@@ -96,19 +96,19 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "modules-demo=modules.cli:main",
-            "modules-servo=modules.cli:servo_cli_entry",
-            "modules-oled=modules.cli:oled_cli_entry",
-            "modules-relay=modules.cli:relay_cli_entry",
-            "modules-server=modules.cli:server_cli_entry",
-            "modules-gsm=modules.gsm.cli:main",
-            "modules-ir-temp=modules.cli:ir_temp_cli_entry",
-            "modules-scheduler=modules.scheduler.cli:main",
+            "botibot-demo=botibot.cli:main",
+            "botibot-servo=botibot.cli:servo_cli_entry",
+            "botibot-oled=botibot.cli:oled_cli_entry",
+            "botibot-relay=botibot.cli:relay_cli_entry",
+            "botibot-server=botibot.cli:server_cli_entry",
+            "botibot-gsm=botibot.gsm.cli:main",
+            "botibot-ir-temp=botibot.cli:ir_temp_cli_entry",
+            "botibot-scheduler=botibot.scheduler.cli:main",
         ],
     },
     include_package_data=True,
     package_data={
-        "modules": [
+        "botibot": [
             "*.md",
             "templates/*.html",
             "static/css/*.css",
@@ -117,7 +117,8 @@ setup(
     },
     zip_safe=False,
     keywords=[
-        "modules.py",
+        "botibot.py",
+        "botibot",
         "modules",
         "raspberry-pi",
         "microcontroller",

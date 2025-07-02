@@ -11,7 +11,7 @@ import sys
 import time
 
 try:
-    from modules import (
+    from botibot import (
         ServoController, 
         OLEDDisplay, 
         RelayController, 
@@ -22,9 +22,9 @@ try:
         DualMotorController
     )
     # Import new modules
-    from modules.gsm import SIM800LController
-    from modules.ir_temp import MLX90614Sensor
-    from modules.scheduler import PillScheduler
+    from botibot.gsm import SIM800LController
+    from botibot.ir_temp import MLX90614Sensor
+    from botibot.scheduler import PillScheduler
 except ImportError as e:
     print(f"Error importing modules: {e}")
     print("Make sure modules.py is properly installed")

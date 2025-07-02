@@ -151,7 +151,7 @@ def test_import_modules():
 def test_import_servo_controller():
     """Test importing ServoController."""
     try:
-        from modules import ServoController
+        from botibot import ServoController
 
         assert ServoController is not None
     except ImportError as e:
@@ -161,7 +161,7 @@ def test_import_servo_controller():
 def test_import_oled_display():
     """Test importing OLEDDisplay."""
     try:
-        from modules import OLEDDisplay
+        from botibot import OLEDDisplay
 
         assert OLEDDisplay is not None
     except ImportError as e:
@@ -171,7 +171,7 @@ def test_import_oled_display():
 def test_import_relay_controller():
     """Test importing RelayController."""
     try:
-        from modules import RelayController
+        from botibot import RelayController
 
         assert RelayController is not None
     except ImportError as e:
@@ -181,7 +181,7 @@ def test_import_relay_controller():
 def test_import_flask_server():
     """Test importing FlaskServer."""
     try:
-        from modules import FlaskServer
+        from botibot import FlaskServer
 
         assert FlaskServer is not None
     except ImportError as e:
@@ -190,7 +190,7 @@ def test_import_flask_server():
 
 def test_servo_controller_basic():
     """Test basic ServoController functionality."""
-    from modules import ServoController
+    from botibot import ServoController
 
     # Test initialization (should not raise error with mocked GPIO)
     servo = ServoController(pin=11)
@@ -204,7 +204,7 @@ def test_servo_controller_basic():
 
 def test_flask_server_basic():
     """Test basic FlaskServer functionality."""
-    from modules import FlaskServer
+    from botibot import FlaskServer
 
     # Test initialization
     server = FlaskServer(name="Test Server", port=5001)
@@ -229,7 +229,7 @@ def test_flask_server_basic():
 
 def test_gsm_controller_basic():
     """Test basic GSM controller functionality."""
-    from modules.gsm import SIM800LController
+    from botibot.gsm import SIM800LController
 
     # Test initialization (should not raise error with mocked Serial)
     gsm = SIM800LController(port="/dev/ttyS0", baudrate=9600)
@@ -246,7 +246,7 @@ def test_gsm_controller_basic():
 
 def test_ir_temp_sensor_basic():
     """Test basic IR Temperature sensor functionality."""
-    from modules.ir_temp import MLX90614Sensor
+    from botibot.ir_temp import MLX90614Sensor
 
     # Test initialization (should not raise error with mocked SMBus and MLX90614)
     ir_temp = MLX90614Sensor(bus_number=1, address=0x5A)
@@ -267,7 +267,7 @@ def test_ir_temp_sensor_basic():
 
 def test_pill_scheduler_basic():
     """Test basic Pill Scheduler functionality."""
-    from modules.scheduler import PillScheduler
+    from botibot.scheduler import PillScheduler
 
     # Test initialization
     scheduler = PillScheduler()

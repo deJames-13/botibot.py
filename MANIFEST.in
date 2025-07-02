@@ -9,7 +9,7 @@ include pyproject.toml
 include demo_all_modules.py
 
 # Include package data
-recursive-include modules *.py
+recursive-include botibot *.py
 
 # Include test files
 recursive-include tests *.py

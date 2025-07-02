@@ -13,15 +13,19 @@ gpiozero
 # For Web Server
 Flask
 Flask-CORS
-
-# General utilities
-python-dateutil
+requests
 
 # For IR Temperature Sensor (MLX90614)
 adafruit-circuitpython-mlx90614
 adafruit-blinka
 # smbus2  # Not needed with Adafruit library
 # mlx90614  # Not needed with Adafruit library
+
+# For GSM Module
+pyserial
+
+# General utilities
+python-dateutil
 
 # For Scheduler
 schedule

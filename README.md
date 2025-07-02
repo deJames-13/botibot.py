@@ -1,10 +1,10 @@
-# modules.py
+# botibot.py
 
 A python package for Project Botibot - A collection of reusable, class-based utility modules for common Raspberry Pi microcontroller projects. These modules provide easy-to-use interfaces for controlling servos, OLED displays, relays, infrared sensors, ultrasonic sensors, motors, and web servers with **gpiozero integration** for better reliability and performance.
 
 ## 📦 Modules Overview
 
-### 1. ServoController (`modules/servo/`)
+### 1. ServoController (`botibot/servo/`)
 - **Purpose**: Control servo motors with PWM signals using **gpiozero**
 - **Features**: 
   - Precise angle control (0-180°)
@@ -12,7 +12,7 @@ A python package for Project Botibot - A collection of reusable, class-based uti
   - Context manager support
   - PiGPIO support for better performance
 
-### 2. OLEDDisplay (`modules/oled/`)
+### 2. OLEDDisplay (`botibot/oled/`)
 - **Purpose**: Control SSD1306-based I2C OLED displays
 - **Features**: 
   - Text and graphics rendering
@@ -20,7 +20,7 @@ A python package for Project Botibot - A collection of reusable, class-based uti
   - Scrolling and blinking effects
   - Progress bars and status displays
 
-### 3. RelayController (`modules/relay/`)
+### 3. RelayController (`botibot/relay/`)
 - **Purpose**: Control relay modules using **gpiozero**
 - **Features**: 
   - Single and multiple relay control with OutputDevice
@@ -28,7 +28,7 @@ A python package for Project Botibot - A collection of reusable, class-based uti
   - Pattern sequences (wave, blink)
   - Thread-safe background operations
 
-### 4. FlaskServer (`modules/webserver/`)
+### 4. FlaskServer (`botibot/webserver/`)
 - **Purpose**: Create configurable web interfaces and APIs
 - **Features**: 
   - Beautiful responsive web dashboard
@@ -36,7 +36,7 @@ A python package for Project Botibot - A collection of reusable, class-based uti
   - Real-time data sharing
   - Custom route support
 
-### 5. InfraredSensor (`modules/infrared/`)
+### 5. InfraredSensor (`botibot/infrared/`)
 - **Purpose**: Control infrared sensors with gpiozero
 - **Features**:
   - Motion detection and proximity sensing
@@ -152,7 +152,7 @@ pip install dist/*.whl
 
 #### Servo Control
 ```python
-from modules import ServoController
+from botibot import ServoController
 
 # Basic servo control with gpiozero
 with ServoController(pin=11) as servo:
@@ -164,7 +164,7 @@ with ServoController(pin=11) as servo:
 
 #### OLED Display
 ```python
-from modules import OLEDDisplay
+from botibot import OLEDDisplay
 
 # Create display and show text
 oled = OLEDDisplay(width=128, height=64)
@@ -182,7 +182,7 @@ oled.show()
 
 #### Relay Control
 ```python
-from modules import RelayController
+from botibot import RelayController
 
 # Basic relay control with gpiozero
 with RelayController(pin=17) as relay:
@@ -199,7 +199,7 @@ with RelayController(pin=17) as relay:
 
 #### Infrared Sensor
 ```python
-from modules import InfraredSensor
+from botibot import InfraredSensor
 
 # Motion detection with gpiozero
 sensor = InfraredSensor(pin=18)
@@ -213,7 +213,7 @@ sensor.start_monitoring()
 
 #### Ultrasonic Sensor
 ```python
-from modules import UltrasonicSensor
+from botibot import UltrasonicSensor
 
 # Distance measurement with gpiozero
 sensor = UltrasonicSensor(trigger_pin=23, echo_pin=24)
@@ -228,7 +228,7 @@ sensor.start_monitoring()
 
 #### Motor Control
 ```python
-from modules import MotorController, DualMotorController
+from botibot import MotorController, DualMotorController
 
 # Single motor control
 motor = MotorController(forward_pin=20, backward_pin=21)
@@ -246,7 +246,7 @@ robot.turn_left(speed=0.3)
 
 #### Web Server
 ```python
-from modules import FlaskServer
+from botibot import FlaskServer
 
 # Create web server
 server = FlaskServer(name="My Pi Server", port=5000)

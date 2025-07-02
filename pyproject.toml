@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "modules.py"
+name = "botibot.py"
 dynamic = ["version"]
 description = "A python package for Project Botibot with gpiozero integration"
 readme = "README.md"
@@ -90,27 +90,27 @@ full = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/deJames-13/modules.py"
-Documentation = "https://github.com/deJames-13/modules.py/blob/main/README.md"
-Repository = "https://github.com/deJames-13/modules.py.git"
-"Bug Tracker" = "https://github.com/deJames-13/modules.py/issues"
-Changelog = "https://github.com/deJames-13/modules.py/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/deJames-13/botibot.py"
+Documentation = "https://github.com/deJames-13/botibot.py/blob/main/README.md"
+Repository = "https://github.com/deJames-13/botibot.py.git"
+"Bug Tracker" = "https://github.com/deJames-13/botibot.py/issues"
+Changelog = "https://github.com/deJames-13/botibot.py/blob/main/CHANGELOG.md"
 
 [project.scripts]
-modules-demo = "modules.cli:main"
-modules-servo = "modules.cli:servo_cli_entry"
-modules-oled = "modules.cli:oled_cli_entry"
-modules-relay = "modules.cli:relay_cli_entry"
-modules-server = "modules.cli:server_cli_entry"
+botibot-demo = "botibot.cli:main"
+botibot-servo = "botibot.cli:servo_cli_entry"
+botibot-oled = "botibot.cli:oled_cli_entry"
+botibot-relay = "botibot.cli:relay_cli_entry"
+botibot-server = "botibot.cli:server_cli_entry"
 
 [tool.setuptools]
-packages = ["modules", "modules.servo", "modules.oled", "modules.relay", "modules.webserver", "modules.infrared", "modules.ultrasonic", "modules.motor"]
+packages = ["botibot", "botibot.servo", "botibot.oled", "botibot.relay", "botibot.webserver", "botibot.infrared", "botibot.ultrasonic", "botibot.motor"]
 
 [tool.setuptools.package-data]
-modules = ["*.md", "templates/*.html", "static/css/*.css", "static/js/*.js"]
+botibot = ["*.md", "templates/*.html", "static/css/*.css", "static/js/*.js"]
 
 [tool.setuptools_scm]
-write_to = "modules/_version.py"
+write_to = "botibot/_version.py"
 
 [tool.black]
 line-length = 88
@@ -134,7 +134,7 @@ extend-exclude = '''
 profile = "black"
 multi_line_output = 3
 line_length = 88
-known_first_party = ["modules"]
+known_first_party = ["botibot"]
 
 [tool.flake8]
 max-line-length = 88
@@ -165,7 +165,7 @@ addopts = [
     "--strict-markers",
     "--strict-config",
     "--verbose",
-    "--cov=modules",
+    "--cov=botibot",
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=xml",

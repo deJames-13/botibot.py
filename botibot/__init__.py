@@ -1,4 +1,4 @@
-# Modules.py Package
+# Botibot.py Package
 # A python package for Project Botibot
 
 from .servo import ServoController

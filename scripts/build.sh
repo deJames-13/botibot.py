@@ -63,7 +63,7 @@ run_tests() {
     print_status "Running tests..."
     
     if command_exists pytest; then
-        pytest tests/ -v --cov=modules --cov-report=term-missing
+        pytest tests/ -v --cov=botibot --cov-report=term-missing
         print_success "Tests completed"
     else
         print_warning "pytest not found, skipping tests"
@@ -76,7 +76,7 @@ run_linting() {
     
     if command_exists black; then
         print_status "Running black formatter..."
-        black modules/ --check --diff
+        black botibot/ --check --diff
     fi
     
     if command_exists flake8; then

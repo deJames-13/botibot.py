@@ -26,10 +26,10 @@ import os
 # Add the modules directory to the path
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "modules"))
 
-from modules import ServoController, OLEDDisplay, RelayController, FlaskServer
-from modules.gsm import SIM800LController
-from modules.ir_temp import MLX90614Sensor
-from modules.scheduler import PillScheduler
+from botibot import ServoController, OLEDDisplay, RelayController, FlaskServer
+from botibot.gsm import SIM800LController
+from botibot.ir_temp import MLX90614Sensor
+from botibot.scheduler import PillScheduler
 
 
 class RaspberryPiController:
