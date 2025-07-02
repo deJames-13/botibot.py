@@ -42,7 +42,7 @@ def read_requirements():
 
 setup(
     name="botibot.py",
-    version="1.0.4",
+    version="1.0.5",
     author="deJames-13",
     author_email="de.james013@gmail.com",
     description="A python package for Project Botibot with gpiozero integration",
