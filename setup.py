@@ -37,12 +37,16 @@ def read_requirements():
             "Flask",
             "Flask-CORS",
             "python-dateutil",
+            "adafruit-circuitpython-mlx90614",
+            "pyserial",
+            "schedule",
+            "apscheduler",
         ]
 
 
 setup(
     name="botibot.py",
-    version="1.0.5",
+    version="1.0.6",
     author="deJames-13",
     author_email="de.james013@gmail.com",
     description="A python package for Project Botibot with gpiozero integration",

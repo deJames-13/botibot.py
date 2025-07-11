@@ -60,13 +60,10 @@ dependencies = [
     "Flask",
     "Flask-CORS", 
     "python-dateutil",
-    "adafruit-circuitpython-ssd1306",
-    "adafruit-blinka",
-    "Pillow",
-    "RPi.GPIO",
-    "Flask",
-    "Flask-CORS",
-    "python-dateutil",
+    "adafruit-circuitpython-mlx90614",
+    "pyserial",
+    "schedule",
+    "apscheduler",
 ]
 
 [project.optional-dependencies]
